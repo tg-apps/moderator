@@ -1,0 +1,22 @@
+{
+  "name": "moderator",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "test": "bun test",
+    "dev": "NODE_ENV=development bun run ./src/index.ts",
+    "build": "NODE_ENV=production bun build --minify --compile ./src/index.ts --outfile=dist/bot",
+    "build:linux": "bun run build --target=bun-linux-arm64",
+    "build:windows": "bun run build --target=bun-windows-x64",
+    "start": "./dist/bot"
+  },
+  "dependencies": {
+    "@grammyjs/parse-mode": "^2.2.0",
+    "@grammyjs/runner": "^2.0.3",
+    "grammy": "^1.38.4"
+  },
+  "devDependencies": {
+    "@types/bun": "^1.3.3",
+    "typescript": "^5.9.3"
+  }
+}
