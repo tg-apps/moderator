@@ -1,7 +1,7 @@
 {
   "name": "moderator",
-  "type": "module",
   "private": true,
+  "type": "module",
   "scripts": {
     "test": "bun test",
     "format": "oxfmt --list-different || oxfmt",

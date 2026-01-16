@@ -326,7 +326,7 @@ describe("getRestrictionDurationAndReason", () => {
 
     it("one-word duration + multi-word reason", () => {
       expect(
-        getRestrictionDurationAndReason("3ч breaking rules")
+        getRestrictionDurationAndReason("3ч breaking rules"),
       ).toMatchObject({
         durationSeconds: 3600 * 3,
         humanReadable: "на 3 часа",
@@ -334,7 +334,7 @@ describe("getRestrictionDurationAndReason", () => {
       });
 
       expect(
-        getRestrictionDurationAndReason("1w breaking rules")
+        getRestrictionDurationAndReason("1w breaking rules"),
       ).toMatchObject({
         durationSeconds: 3600 * 24 * 7,
         humanReadable: "на 1 неделю",
@@ -344,7 +344,7 @@ describe("getRestrictionDurationAndReason", () => {
 
     it("multi-word duration + multi-word reason", () => {
       expect(
-        getRestrictionDurationAndReason("5 минут breaking rules")
+        getRestrictionDurationAndReason("5 минут breaking rules"),
       ).toMatchObject({
         durationSeconds: 300,
         humanReadable: "на 5 минут",
@@ -352,7 +352,7 @@ describe("getRestrictionDurationAndReason", () => {
       });
 
       expect(
-        getRestrictionDurationAndReason("3 days breaking rules")
+        getRestrictionDurationAndReason("3 days breaking rules"),
       ).toMatchObject({
         durationSeconds: 3600 * 24 * 3,
         humanReadable: "на 3 дня",

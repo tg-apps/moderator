@@ -1,5 +1,5 @@
-import { Bot } from "grammy";
 import { run } from "@grammyjs/runner";
+import { Bot } from "grammy";
 
 import * as handler from "./handlers";
 
@@ -13,7 +13,7 @@ const bot = new Bot(TOKEN);
 
 bot.command("start", handler.handle_start);
 bot.command("help", handler.handle_help);
-bot.command("rights", handler.handle_rights)
+bot.command("rights", handler.handle_rights);
 bot.command("mute", handler.handle_mute);
 bot.command("unrestrict", handler.handle_unrestrict);
 bot.command("ban", handler.handle_ban);
