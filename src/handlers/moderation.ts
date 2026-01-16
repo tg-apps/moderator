@@ -1,8 +1,10 @@
 import type { CommandContext, Context } from "grammy";
 import type { User, ChatMember } from "grammy/types";
-import { API_CONSTANTS } from "grammy";
+
 import { FormattedString } from "@grammyjs/parse-mode";
-import { getRestrictionDurationAndReason } from "~/utils/restriction-duration-reason";
+import { API_CONSTANTS } from "grammy";
+
+import { getRestrictionDurationAndReason } from "../utils/restriction-duration-reason";
 
 function isChatMemberAdmin(chatMember: ChatMember) {
   return (
@@ -34,7 +36,7 @@ class MentionableFormattedString extends FormattedString {
       ? (`${user.first_name} ${user.last_name}` as const)
       : user.first_name;
     return new MentionableFormattedString(
-      super.mentionUser(full_name, user.id)
+      super.mentionUser(full_name, user.id),
     );
   }
 
@@ -55,7 +57,7 @@ export async function handle_mute(context: CommandContext<Context>) {
   const canAuthorRestrictMembers = canRestrictMembers(messageAuthor);
   if (!canAuthorRestrictMembers) {
     return context.reply(
-      "У вас нет доступа к данной команде: вы не админ или у вас нет необходимых прав"
+      "У вас нет доступа к данной команде: вы не админ или у вас нет необходимых прав",
     );
   }
   const botChatMember = await context.getChatMember(context.me.id);
@@ -67,12 +69,12 @@ export async function handle_mute(context: CommandContext<Context>) {
     return context.reply("Нельзя замутить админа");
   }
   const { until_date, humanReadable, reason } = getRestrictionDurationAndReason(
-    context.match
+    context.match,
   );
   await context.restrictChatMember(
     target.id,
     { can_send_messages: false },
-    { until_date }
+    { until_date },
   );
   const message = new MentionableFormattedString("Администратор ")
     .mentionUser(messageAuthor.user)
@@ -93,14 +95,14 @@ export async function handle_unrestrict(context: CommandContext<Context>) {
   const target = context.message?.reply_to_message?.from;
   if (!target) {
     return context.reply(
-      "Вы не выбрали пользователя которого хотите размутить"
+      "Вы не выбрали пользователя которого хотите размутить",
     );
   }
   const messageAuthor = await context.getAuthor();
   const canAuthorRestrictMembers = canRestrictMembers(messageAuthor);
   if (!canAuthorRestrictMembers) {
     return context.reply(
-      "У вас нет доступа к данной команде: вы не админ или у вас нет необходимых прав"
+      "У вас нет доступа к данной команде: вы не админ или у вас нет необходимых прав",
     );
   }
   const botChatMember = await context.getChatMember(context.me.id);
@@ -110,7 +112,7 @@ export async function handle_unrestrict(context: CommandContext<Context>) {
   }
   await context.restrictChatMember(
     target.id,
-    API_CONSTANTS.ALL_CHAT_PERMISSIONS
+    API_CONSTANTS.ALL_CHAT_PERMISSIONS,
   );
   const message = new MentionableFormattedString("Пользователь ")
     .mentionUser(target)
@@ -131,7 +133,7 @@ export async function handle_ban(context: CommandContext<Context>) {
   const canAuthorRestrictMembers = canRestrictMembers(messageAuthor);
   if (!canAuthorRestrictMembers) {
     return context.reply(
-      "У вас нет доступа к данной команде: вы не админ или у вас нет необходимых прав"
+      "У вас нет доступа к данной команде: вы не админ или у вас нет необходимых прав",
     );
   }
   const botChatMember = await context.getChatMember(context.me.id);
@@ -143,7 +145,7 @@ export async function handle_ban(context: CommandContext<Context>) {
     return context.reply("Нельзя забанить админа");
   }
   const { until_date, humanReadable, reason } = getRestrictionDurationAndReason(
-    context.match
+    context.match,
   );
   await context.banChatMember(target.id, { until_date });
   const message = new MentionableFormattedString("Администратор ")
@@ -165,14 +167,14 @@ export async function handle_unban(context: CommandContext<Context>) {
   const target = context.message?.reply_to_message?.from;
   if (!target) {
     return context.reply(
-      "Вы не выбрали пользователя которого хотите разбанить"
+      "Вы не выбрали пользователя которого хотите разбанить",
     );
   }
   const messageAuthor = await context.getAuthor();
   const canAuthorRestrictMembers = canRestrictMembers(messageAuthor);
   if (!canAuthorRestrictMembers) {
     return context.reply(
-      "У вас нет доступа к данной команде: вы не админ или у вас нет необходимых прав"
+      "У вас нет доступа к данной команде: вы не админ или у вас нет необходимых прав",
     );
   }
   const botChatMember = await context.getChatMember(context.me.id);

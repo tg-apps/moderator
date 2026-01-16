@@ -6,7 +6,7 @@ interface RestrictionDurationAndReason {
 }
 
 export function getRestrictionDurationAndReason(
-  input: string
+  input: string,
 ): RestrictionDurationAndReason {
   const trimmedInput = input.trim();
   if (!trimmedInput) {
@@ -80,7 +80,7 @@ export function getRestrictionDurationAndReason(
 }
 
 function getUnit(
-  unitStr?: string
+  unitStr?: string,
 ): { type: string; multiplier: number } | null {
   if (!unitStr) {
     return { type: "minute", multiplier: 60 } as const;
@@ -104,21 +104,21 @@ function getUnit(
   }
   if (
     ["h", "hour", "hours", "ч", "час", "часа", "часов"].some((u) =>
-      lower.startsWith(u)
+      lower.startsWith(u),
     )
   ) {
     return { type: "hour", multiplier: 3600 } as const;
   }
   if (
     ["d", "day", "days", "д", "день", "дня", "дней"].some((u) =>
-      lower.startsWith(u)
+      lower.startsWith(u),
     )
   ) {
     return { type: "day", multiplier: 86400 } as const;
   }
   if (
     ["w", "week", "weeks", "н", "неделя", "недели", "неделю", "недель"].some(
-      (u) => lower.startsWith(u)
+      (u) => lower.startsWith(u),
     )
   ) {
     return { type: "week", multiplier: 604800 } as const;
@@ -146,7 +146,7 @@ function declinateRu(
   n: number,
   one: string,
   few: string,
-  many: string
+  many: string,
 ): string {
   const absN = Math.abs(n);
   const mod100 = absN % 100;
