@@ -2,7 +2,7 @@ import type { CommandContext, Context } from "grammy";
 import type { User, ChatMember } from "grammy/types";
 import { API_CONSTANTS } from "grammy";
 import { FormattedString } from "@grammyjs/parse-mode";
-import { getRestrictionDurationAndReason } from "~/utils/restriction-duration-reason";
+import { getRestrictionDurationAndReason } from "../utils/restriction-duration-reason";
 
 function isChatMemberAdmin(chatMember: ChatMember) {
   return (
