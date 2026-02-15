@@ -25,6 +25,8 @@ bot.on("::bot_command", async (context) => {
   await context.reply(response);
 });
 
+bot.on("message:text", handler.handleMessage);
+
 if (process.env.NODE_ENV === "production") {
   bot.api.setMyCommands([
     { command: "help", description: "Помощь" },

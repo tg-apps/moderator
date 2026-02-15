@@ -47,3 +47,4 @@ export {
   handle_ban,
   handle_unban,
 } from "./moderation";
+export { handleMessage } from "./swear";
