@@ -9,13 +9,13 @@ function getUserDisplayName(user: User): string {
   return user.username ? `@${user.username}` : user.first_name;
 }
 
-function handleMessage(
+async function handleMessage(
   context: Context & { chat: Chat; from: User; message: Message.TextMessage },
 ) {
   if (context.chat.type === "private") return;
   if (containsSwear(context.message.text)) {
-    context.deleteMessage();
-    context.reply(`Не ругаемся, ${getUserDisplayName(context.from)}`);
+    await context.deleteMessage();
+    await context.reply(`Не ругаемся, ${getUserDisplayName(context.from)}`);
   }
 }
 

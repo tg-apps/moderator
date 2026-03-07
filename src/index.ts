@@ -28,7 +28,7 @@ bot.on("::bot_command", async (context) => {
 bot.on("message:text", handler.handleMessage);
 
 if (process.env.NODE_ENV === "production") {
-  bot.api.setMyCommands([
+  void bot.api.setMyCommands([
     { command: "help", description: "Помощь" },
     { command: "rights", description: "Узнать необходимые права" },
     { command: "mute", description: "Замутить пользователя" },
