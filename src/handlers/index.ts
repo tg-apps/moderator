@@ -1,5 +1,4 @@
 import type { CommandContext, Context } from "grammy";
-
 import { InlineKeyboard } from "grammy";
 
 export function handle_start(context: CommandContext<Context>) {

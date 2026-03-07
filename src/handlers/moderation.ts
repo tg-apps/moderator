@@ -1,8 +1,7 @@
-import type { CommandContext, Context } from "grammy";
-import type { User, ChatMember } from "grammy/types";
-
 import { FormattedString } from "@grammyjs/parse-mode";
+import type { CommandContext, Context } from "grammy";
 import { API_CONSTANTS } from "grammy";
+import type { User, ChatMember } from "grammy/types";
 
 import { getRestrictionDurationAndReason } from "../utils/restriction-duration-reason";
 

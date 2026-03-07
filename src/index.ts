@@ -27,16 +27,14 @@ bot.on("::bot_command", async (context) => {
 
 bot.on("message:text", handler.handleMessage);
 
-if (process.env.NODE_ENV === "production") {
-  void bot.api.setMyCommands([
-    { command: "help", description: "Помощь" },
-    { command: "rights", description: "Узнать необходимые права" },
-    { command: "mute", description: "Замутить пользователя" },
-    { command: "unrestrict", description: "Размутить пользователя" },
-    { command: "ban", description: "Забанить пользователя" },
-    { command: "unban", description: "Разбанить пользователя" },
-  ]);
-}
+void bot.api.setMyCommands([
+  { command: "help", description: "Помощь" },
+  { command: "rights", description: "Узнать необходимые права" },
+  { command: "mute", description: "Замутить пользователя" },
+  { command: "unrestrict", description: "Размутить пользователя" },
+  { command: "ban", description: "Забанить пользователя" },
+  { command: "unban", description: "Разбанить пользователя" },
+]);
 
 const runner = run(bot);
 
