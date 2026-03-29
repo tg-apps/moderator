@@ -1,4 +1,5 @@
 const MARKDOWN_V2_SPECIAL_CHARS = [
+  "\\",
   "_",
   "*",
   "[",

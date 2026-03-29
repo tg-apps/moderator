@@ -3,6 +3,10 @@ import { describe, it, expect } from "bun:test";
 import { escapeMarkdownV2 } from "#lib/escape-markdown";
 
 describe("escapeMarkdownV2", () => {
+  it("escapes backslash", () => {
+    expect(escapeMarkdownV2("hello\\world")).toBe("hello\\\\world");
+  });
+
   it("escapes underscore", () => {
     expect(escapeMarkdownV2("hello_world")).toBe("hello\\_world");
   });
@@ -70,8 +74,8 @@ describe("escapeMarkdownV2", () => {
   });
 
   it("escapes all special characters in one string", () => {
-    expect(escapeMarkdownV2("_ * [ ] ( ) ~ ` > # + - = | { } . !")).toBe(
-      "\\_ \\* \\[ \\] \\( \\) \\~ \\` \\> \\# \\+ \\- \\= \\| \\{ \\} \\. \\!",
+    expect(escapeMarkdownV2("\\ _ * [ ] ( ) ~ ` > # + - = | { } . !")).toBe(
+      "\\\\ \\_ \\* \\[ \\] \\( \\) \\~ \\` \\> \\# \\+ \\- \\= \\| \\{ \\} \\. \\!",
     );
   });
 
