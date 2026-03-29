@@ -20,14 +20,16 @@ if (!TOKEN) {
 
 const bot = new Bot(TOKEN);
 
-bot.command("start", handle_start);
-bot.command("help", handle_help);
-bot.command("rights", handle_rights);
-bot.command("mute", handle_mute);
-bot.command("unrestrict", handle_unrestrict);
-bot.command("ban", handle_ban);
-bot.command("unban", handle_unban);
-bot.command("report", handle_report);
+const m = bot.on("message:text");
+
+m.command("start", handle_start);
+m.command("help", handle_help);
+m.command("rights", handle_rights);
+m.command("mute", handle_mute);
+m.command("unrestrict", handle_unrestrict);
+m.command("ban", handle_ban);
+m.command("unban", handle_unban);
+m.command("report", handle_report);
 
 bot.on("::bot_command", async (context) => {
   if (context.chat.type !== "private") return;

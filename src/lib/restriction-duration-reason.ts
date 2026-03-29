@@ -1,6 +1,6 @@
 interface RestrictionDurationAndReason {
   durationSeconds: number;
-  untilDate: number;
+  until_date: number;
   humanReadable: string;
   reason: string | null;
 }
@@ -12,7 +12,7 @@ export function getRestrictionDurationAndReason(
   if (!trimmedInput) {
     return {
       durationSeconds: 0,
-      untilDate: 0,
+      until_date: 0,
       humanReadable: "навсегда",
       reason: null,
     };
@@ -45,7 +45,7 @@ export function getRestrictionDurationAndReason(
     // No duration, whole input is reason
     return {
       durationSeconds: 0,
-      untilDate: 0,
+      until_date: 0,
       humanReadable: "навсегда",
       reason: trimmedInput,
     };
@@ -57,7 +57,7 @@ export function getRestrictionDurationAndReason(
     // Invalid unit, treat as reason (though not expected in tests)
     return {
       durationSeconds: 0,
-      untilDate: 0,
+      until_date: 0,
       humanReadable: "навсегда",
       reason: trimmedInput,
     };
@@ -73,7 +73,7 @@ export function getRestrictionDurationAndReason(
 
   return {
     durationSeconds,
-    untilDate: until_date,
+    until_date,
     humanReadable,
     reason,
   };

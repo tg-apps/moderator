@@ -67,7 +67,7 @@ export async function handle_mute(context: CommandContext<Context>) {
   if (isChatMemberAdmin(await context.getChatMember(target.id))) {
     return context.reply("Нельзя замутить админа");
   }
-  const { untilDate: until_date, humanReadable, reason } = getRestrictionDurationAndReason(
+  const { until_date, humanReadable, reason } = getRestrictionDurationAndReason(
     context.match,
   );
   await context.restrictChatMember(
@@ -143,7 +143,7 @@ export async function handle_ban(context: CommandContext<Context>) {
   if (isChatMemberAdmin(await context.getChatMember(target.id))) {
     return context.reply("Нельзя забанить админа");
   }
-  const { untilDate: until_date, humanReadable, reason } = getRestrictionDurationAndReason(
+  const { until_date, humanReadable, reason } = getRestrictionDurationAndReason(
     context.match,
   );
   await context.banChatMember(target.id, { until_date });
