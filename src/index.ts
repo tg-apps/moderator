@@ -1,7 +1,16 @@
 import { run } from "@grammyjs/runner";
 import { Bot } from "grammy";
 
-import * as handler from "./handlers";
+import { handle_help, handle_rights } from "./handlers/help";
+import {
+  handle_ban,
+  handle_mute,
+  handle_unban,
+  handle_unrestrict,
+} from "./handlers/moderation";
+import { handle_report } from "./handlers/report";
+import { handle_start } from "./handlers/start";
+import { handleMessage } from "./handlers/swear";
 
 const TOKEN = process.env["TOKEN"];
 
@@ -11,13 +20,16 @@ if (!TOKEN) {
 
 const bot = new Bot(TOKEN);
 
-bot.command("start", handler.handle_start);
-bot.command("help", handler.handle_help);
-bot.command("rights", handler.handle_rights);
-bot.command("mute", handler.handle_mute);
-bot.command("unrestrict", handler.handle_unrestrict);
-bot.command("ban", handler.handle_ban);
-bot.command("unban", handler.handle_unban);
+const m = bot.on("message:text");
+
+m.command("start", handle_start);
+m.command("help", handle_help);
+m.command("rights", handle_rights);
+m.command("mute", handle_mute);
+m.command("unrestrict", handle_unrestrict);
+m.command("ban", handle_ban);
+m.command("unban", handle_unban);
+m.command("report", handle_report);
 
 bot.on("::bot_command", async (context) => {
   if (context.chat.type !== "private") return;
@@ -25,7 +37,7 @@ bot.on("::bot_command", async (context) => {
   await context.reply(response);
 });
 
-bot.on("message:text", handler.handleMessage);
+bot.on("message:text", handleMessage);
 
 void bot.api.setMyCommands([
   { command: "help", description: "Помощь" },
@@ -34,6 +46,7 @@ void bot.api.setMyCommands([
   { command: "unrestrict", description: "Размутить пользователя" },
   { command: "ban", description: "Забанить пользователя" },
   { command: "unban", description: "Разбанить пользователя" },
+  { command: "report", description: "Пожаловаться на пользователя" },
 ]);
 
 const runner = run(bot);

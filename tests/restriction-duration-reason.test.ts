@@ -1,6 +1,6 @@
 import { describe, it, expect } from "bun:test";
 
-import { getRestrictionDurationAndReason } from "../src/utils/restriction-duration-reason";
+import { getRestrictionDurationAndReason } from "#lib/restriction-duration-reason";
 
 describe("getRestrictionDurationAndReason", () => {
   describe("empty strings", () => {
