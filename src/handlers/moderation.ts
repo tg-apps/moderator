@@ -3,7 +3,6 @@ import type { CommandContext, Context } from "grammy";
 import { API_CONSTANTS } from "grammy";
 import type { User, ChatMember } from "grammy/types";
 
-import { escapeMarkdownV2 } from "#lib/escape-markdown";
 import { getRestrictionDurationAndReason } from "#lib/restriction-duration-reason";
 
 function isChatMemberAdmin(chatMember: ChatMember) {
@@ -84,9 +83,7 @@ export async function handle_mute(context: CommandContext<Context>) {
   if (!reason) {
     return context.reply(message.text, { entities: message.entities });
   }
-  const { text, entities } = message.plain(
-    `\n\nПричина: ${escapeMarkdownV2(reason)}`,
-  );
+  const { text, entities } = message.plain(`\n\nПричина: ${reason}`);
   return context.reply(text, { entities });
 }
 
@@ -158,9 +155,7 @@ export async function handle_ban(context: CommandContext<Context>) {
   if (!reason) {
     return context.reply(message.text, { entities: message.entities });
   }
-  const { text, entities } = message.plain(
-    `\n\nПричина: ${escapeMarkdownV2(reason)}`,
-  );
+  const { text, entities } = message.plain(`\n\nПричина: ${reason}`);
   return context.reply(text, { entities });
 }
 
