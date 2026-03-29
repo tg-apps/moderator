@@ -6,7 +6,7 @@
     "#lib/*": "./src/lib/*.ts"
   },
   "scripts": {
-    "test": "bun test",
+    "test": "bun test --dots",
     "format": "oxfmt",
     "lint": "oxlint",
     "dev": "NODE_ENV=development bun run ./src/index.ts",

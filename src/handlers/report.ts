@@ -1,6 +1,8 @@
 import type { CommandContext, Context } from "grammy";
 import type { User } from "grammy/types";
 
+import { escapeMarkdownV2 } from "#lib/escape-markdown";
+
 export async function handle_report(
   context: CommandContext<Context> & { from: User },
 ) {
@@ -14,11 +16,27 @@ export async function handle_report(
     );
   }
   const reporter = context.from;
-  const reason = context.match || "не указана";
+
+  const from = escapeMarkdownV2(reporter.username || reporter.first_name);
+  const targetName = escapeMarkdownV2(target.username || target.first_name);
+
+  const reason = escapeMarkdownV2(context.match) || "не указана";
   const reportedMessage = context.message?.reply_to_message;
-  const reportedMessageText = reportedMessage?.text || "[не текст]";
-  const chatTitle = context.chat.title || "группа";
-  const reportMessage = `⚠️ *Жалоба на пользователя*\n\nЧат: ${chatTitle}\nОт: @${reporter.username || reporter.first_name}\nНа кого: @${target.username || target.first_name}\nПричина: ${reason}\n\nСообщение: ${reportedMessageText}`;
+  const reportedMessageText = escapeMarkdownV2(
+    reportedMessage?.text || "[не текст]",
+  );
+  const chatTitle = escapeMarkdownV2(context.chat.title) || "группа";
+
+  const reportMessage = `\
+⚠️ *Жалоба на пользователя*
+
+Чат: ${chatTitle}
+От: @${from}
+На кого: @${targetName}
+Причина: ${reason}
+
+Сообщение: ${reportedMessageText}`;
+
   const admins = await context.getChatAdministrators();
   const owner = admins.find((admin) => admin.status === "creator");
   if (!owner || owner.user.is_bot) {
