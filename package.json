@@ -15,7 +15,7 @@
   "dependencies": {
     "@grammyjs/parse-mode": "2.3.0",
     "@grammyjs/runner": "2.0.3",
-    "grammy": "1.43.0"
+    "grammy": "1.44.0"
   },
   "devDependencies": {
     "@gameroman/config": "0.1.0",
