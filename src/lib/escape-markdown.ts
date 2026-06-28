@@ -1,33 +1,5 @@
-const MARKDOWN_V2_SPECIAL_CHARS = [
-  "\\",
-  "_",
-  "*",
-  "[",
-  "]",
-  "(",
-  ")",
-  "~",
-  "`",
-  ">",
-  "#",
-  "+",
-  "-",
-  "=",
-  "|",
-  "{",
-  "}",
-  ".",
-  "!",
-];
+const MARKDOWN_V2_REGEX = /([\\[\]_*()~`>#+\-=|{}.!])/g;
 
 export function escapeMarkdownV2(text: string): string {
-  let result = "";
-  for (const char of text) {
-    if (MARKDOWN_V2_SPECIAL_CHARS.includes(char)) {
-      result += "\\" + char;
-    } else {
-      result += char;
-    }
-  }
-  return result;
+  return text.replace(MARKDOWN_V2_REGEX, "\\$1");
 }
